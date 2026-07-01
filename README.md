@@ -1,0 +1,212 @@
+[1.html](https://github.com/user-attachments/files/29547598/1.html)
+[my.html](https://github.com/user-attachments/files/25200031/my.html)
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>💖</title>
+
+<style>
+
+/* ===== RESET ===== */
+html, body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    height: 100%;
+
+    font-family: Arial, sans-serif;
+
+    -webkit-text-size-adjust: 100%;
+    touch-action: manipulation;
+}
+
+body {
+    overflow: hidden;
+}
+
+
+/* ===== SCREENS ===== */
+.screen {
+    position: fixed;   /* 🔥 ВАЖНО */
+    top: 0;
+    left: 0;
+
+    width: 100%;
+    height: 100%;
+
+    display: none;
+
+    justify-content: center;
+    align-items: center;
+}
+
+.screen.active {
+    display: flex;
+}
+
+#screen1,
+#screen2,
+#screen3 {
+    background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+}
+
+
+/* ===== CARD ===== */
+.card {
+    position: relative;
+
+    background: white;
+    padding: 64px 32px;
+
+    border-radius: 40px;
+    text-align: center;
+
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+
+    width: 90%;
+    max-width: 420px;
+}
+
+h1 {
+    margin-bottom: 30px;
+}
+
+
+/* ===== BUTTONS ===== */
+button {
+    font-size: 24px;
+    padding: 14px 28px;
+
+    border-radius: 32px;
+    border: none;
+
+    background: #ff4d6d;
+    color: white;
+
+    cursor: pointer;
+
+    -webkit-tap-highlight-color: transparent;
+    user-select: none;
+}
+
+#no {
+    background: #ddd;
+    color: #333;
+
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+
+/* ===== FINAL TEXT ===== */
+.final-text {
+    font-size: 44px;
+    color: white;
+
+    text-shadow: 0 4px 10px rgba(0,0,0,0.3);
+    text-align: center;
+}
+
+</style>
+</head>
+
+<body>
+
+<!-- SCREEN 1 -->
+<div id="screen1" class="screen active">
+
+    <div class="card">
+
+        <h1>Саааааааааааш?</h1>
+
+        <button id="startBtn">
+            что такое? *нежнейшим голосом*
+        </button>
+
+    </div>
+
+</div>
+
+
+<!-- SCREEN 2 -->
+<div id="screen2" class="screen">
+
+    <div class="card" id="card2">
+
+        <h1>Пойдём на цветное свидание послезавтра?</h1>
+
+        <button id="yes">Да</button>
+
+        <br><br>
+
+        <button id="no">Нет</button>
+
+    </div>
+
+</div>
+
+
+<!-- SCREEN 3 -->
+<div id="screen3" class="screen">
+
+    <h1 class="final-text">
+        Супер!)
+    </h1>
+
+</div>
+
+
+<script>
+
+/* ===== ELEMENTS ===== */
+
+const screens  = document.querySelectorAll(".screen");
+
+const startBtn = document.getElementById("startBtn");
+const yesBtn   = document.getElementById("yes");
+const noBtn    = document.getElementById("no");
+const card     = document.getElementById("card2");
+
+
+/* ===== NAVIGATION ===== */
+
+function go(n) {
+
+    screens.forEach(s => s.classList.remove("active"));
+
+    document
+        .getElementById("screen" + n)
+        .classList.add("active");
+}
+
+
+/* ===== SIMPLE CLICK (NOW WORKS) ===== */
+
+startBtn.onclick = () => go(2);
+yesBtn.onclick   = () => go(3);
+
+
+/* ===== NO MOVE ===== */
+
+function moveNo() {
+
+    const maxX = card.clientWidth  - noBtn.offsetWidth;
+    const maxY = card.clientHeight - noBtn.offsetHeight;
+
+    noBtn.style.left = Math.random() * maxX + "px";
+    noBtn.style.top  = Math.random() * maxY + "px";
+
+    noBtn.style.transform = "none";
+}
+
+
+noBtn.addEventListener("touchstart", moveNo);
+noBtn.addEventListener("mouseover", moveNo);
+
+</script>
+
+</body>
+</html>
